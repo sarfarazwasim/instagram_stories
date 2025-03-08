@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './StoryList.scss';
 
 function Home() {
@@ -74,10 +74,9 @@ function Home() {
         })
       }
       {
-        isModalVisible && !isFetchingData &&
-        <div className="story-list__modal">
+        <div className={"story-list__modal" + (isModalVisible ? ' visible-modal' : '')}>
           <div className="story-list__modal--content">
-            { isImageLoading && <div className="loader"></div> }
+            { (isImageLoading || isFetchingData) && <div className="loader"></div> }
             <div className="story-image">
               <img src={currentImg} alt=""
                 onClick={(e) => handleClick(e)}
@@ -95,14 +94,13 @@ function Home() {
           </div>
         </div>
       }
-      {
-        isModalVisible && isFetchingData &&
-        <div className="story-list__modal">
+      {/* {
+        <div className={"story-list__modal" + (isModalVisible && isFetchingData ? ' visible-modal' : '')}>
           <div className="story-list__modal--content">
             <div className="loader"></div>
           </div>
         </div>
-      }
+      } */}
     </div>
   );
 }

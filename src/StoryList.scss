@@ -1,9 +1,7 @@
 .story-list {
   box-sizing: border-box;
   display: flex;
-  // width: 100%;
   gap: 12px;
-  // flex-wrap: nowrap;
   overflow-x: scroll;
   .icon {
     border: 5px solid #C13584;
@@ -18,14 +16,21 @@
     }
   }
   &__modal {
+    opacity: 0;
     position: fixed;
-    top: 0;
+    top: -100vh;
     left: 0;
+    transition: top 0.3s linear, opacity 0.3s linear;
     height: 100vh;
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.627);
     backdrop-filter: blur(6px);
     z-index: 89;
+    &.visible-modal {
+      // visibility: visible;
+      opacity: 1;
+      top: 0;
+    }
     &--content {
       z-index: 90;
       position: relative;

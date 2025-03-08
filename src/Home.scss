@@ -1,0 +1,12 @@
+.home {
+  // display: flex;
+  width: 100%;
+  padding: 12px 0;
+  &__header {
+    width: 240px;
+    border-right: 1px solid gray;
+    min-height: 100vh;
+    padding: 16px;
+    background-color: red;
+  }
+}

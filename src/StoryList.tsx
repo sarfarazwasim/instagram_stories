@@ -14,15 +14,11 @@ function Home() {
     setImageLoading(true)
     setCurrentImg(url)
     setCurrentImgIndex(index)
-    console.log('isImageLoading', isImageLoading);
-    
   }
   function onSuccess (res: Array<{ download_url: ''}>) {
     console.log('res', res)
     setModalData(res)
-    setTimeout(() => {
-      updateImage(res[0].download_url, 0)
-    }, 0);
+    updateImage(res[0].download_url, 0)
   }
   function fetchStory (index: number) {
     console.log('Index fetch', index)
@@ -40,9 +36,8 @@ function Home() {
     setImageLoading(true)
     setModalVisible(true)
   }
-  function handleClick (event: {clientX: any, clientY: any}) {
+  function handleClick (event: {clientX: any}) {
     const x = event.clientX;
-    console.log('adcsd ', x, window.innerWidth);
     if (x < window.innerWidth / 2) {
       if (currentImgIndex > 0) {
         updateImage(modalData[currentImgIndex - 1].download_url, currentImgIndex - 1)
@@ -73,17 +68,22 @@ function Home() {
         </div>
         })
       }
-      {
         <div className={"story-list__modal" + (isModalVisible ? ' visible-modal' : '')}>
           <div className="story-list__modal--content">
             { (isImageLoading || isFetchingData) && <div className="loader"></div> }
             <div className="story-image">
               <img src={currentImg} alt=""
                 onClick={(e) => handleClick(e)}
-                onLoad={() => { console.log('loaded'); setImageLoading(false)}}
+                onLoad={() => { 
+                  setTimeout(() => {
+                    handleClick({clientX: window.innerWidth})
+                  }, 5000);
+                  setImageLoading(false)
+                }}
                 className={isImageLoading ? 'loading-image' : ''}
               />
             </div>
+            <div className="header"></div>
             <div className="stepper-container">
               {
                 modalData.map(function (item, index) {
@@ -93,14 +93,6 @@ function Home() {
             </div>
           </div>
         </div>
-      }
-      {/* {
-        <div className={"story-list__modal" + (isModalVisible && isFetchingData ? ' visible-modal' : '')}>
-          <div className="story-list__modal--content">
-            <div className="loader"></div>
-          </div>
-        </div>
-      } */}
     </div>
   );
 }

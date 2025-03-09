@@ -9,6 +9,11 @@ function Home() {
         Instagram
       </header>
       <StoryList />
+      <div className="post">
+        <div className="name">Flexiple</div>
+        <img src="https://picsum.photos/400" alt="" />
+        <div className="caption">This is a post</div>
+      </div>
     </div>
   );
 }

@@ -9,13 +9,14 @@ function Home() {
   const [currentImg, setCurrentImg] = useState('');
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const [currentProfileIndex, setCurrentProfileIndex] = useState(0);
-  const [modalData, setModalData] = useState([{ download_url: ''}])
+  const [modalData, setModalData] = useState([{ download_url: '', author: ''}])
+  let timeoutId: ReturnType<typeof setTimeout> = setTimeout(() => '', 0);
   function updateImage (url: string, index: number) {
     setImageLoading(true)
     setCurrentImg(url)
     setCurrentImgIndex(index)
   }
-  function onSuccess (res: Array<{ download_url: ''}>) {
+  function onSuccess (res: Array<{ download_url: '', author: ''}>) {
     console.log('res', res)
     setModalData(res)
     updateImage(res[0].download_url, 0)
@@ -37,6 +38,7 @@ function Home() {
     setModalVisible(true)
   }
   function handleClick (event: {clientX: any}) {
+    clearTimeout(timeoutId)
     const x = event.clientX;
     if (x < window.innerWidth / 2) {
       if (currentImgIndex > 0) {
@@ -46,6 +48,7 @@ function Home() {
       } else {
         setModalVisible(false)
         setModalData([])
+        clearTimeout(timeoutId)
       }
     } else {
       if (currentImgIndex < modalData.length - 1) {
@@ -55,6 +58,7 @@ function Home() {
       } else {
         setModalVisible(false)
         setModalData([])
+        clearTimeout(timeoutId)
       }
     }
     
@@ -75,7 +79,7 @@ function Home() {
               <img src={currentImg} alt=""
                 onClick={(e) => handleClick(e)}
                 onLoad={() => { 
-                  setTimeout(() => {
+                  timeoutId = setTimeout(() => {
                     handleClick({clientX: window.innerWidth})
                   }, 5000);
                   setImageLoading(false)
@@ -83,13 +87,18 @@ function Home() {
                 className={isImageLoading ? 'loading-image' : ''}
               />
             </div>
-            <div className="header"></div>
-            <div className="stepper-container">
-              {
-                modalData.map(function (item, index) {
-                  return <div className={`stepper ${index <= currentImgIndex ? 'active' : ''}`}></div>
-                })
-              }
+            <div className="header">
+              <div className='name'>
+                <div>{modalData[currentImgIndex]?.author}</div>
+                <div className='close-icon' onClick={() => setModalVisible(false)}>×</div>
+              </div>
+              <div className="stepper-container">
+                {
+                  modalData.map(function (item, index) {
+                    return <div className={`stepper ${index <= currentImgIndex ? 'active' : ''}`}></div>
+                  })
+                }
+              </div>
             </div>
           </div>
         </div>

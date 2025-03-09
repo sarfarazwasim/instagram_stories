@@ -28,7 +28,6 @@
     backdrop-filter: blur(6px);
     z-index: 89;
     &.visible-modal {
-      // visibility: visible;
       opacity: 1;
       top: 0;
     }
@@ -42,28 +41,42 @@
         font-size: 20px;
         margin-bottom: 32px;
       }
-      .close-icon {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        cursor: pointer;
-      }
-      .stepper-container {
+      .header {
         box-sizing: border-box;
-        display: flex;
         position: absolute;
-        top: 16px;
-        width: 100%;
         padding: 0 8px;
-        gap: 6px;
-        .stepper {
-          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+        width: 100%;
+        top: 0px;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.285), rgba(0, 0, 0, 0));
+        padding-bottom: 12px;
+        .name {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 4px;
+          align-items: center;
+          > div {
+            text-shadow: 1px 1px 2px rgb(0, 0, 0);
+            font-size: 20px;
+            color: white;
+          }
+          .close-icon {
+            cursor: pointer;
+            font-size: 32px;
+          }
+        }
+        .stepper-container {
           width: 100%;
-          border-radius: 2px;
-          height: 4px;
-          background-color: rgba(5, 0, 0, 0.147);
-          &.active {
-            background-color: white;
+          display: flex;
+          gap: 6px;
+          .stepper {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+            width: 100%;
+            border-radius: 2px;
+            height: 4px;
+            background-color: rgba(111, 111, 111, 0.147);
+            &.active {
+              background-color: white;
+            }
           }
         }
       }

@@ -63,11 +63,11 @@ function Home() {
     
   }
   return (
-    <div className="story-list">
+    <div className="story-list" data-testId="story-list-items">
       {
         storyList.map(function (index) {
-          return <div className="icon">
-          <img src={`https://picsum.photos/200?random=${index}`} alt="" onClick={() => handleListSelection(index)} />
+          return <div className="icon" >
+          <img src={`https://picsum.photos/200?random=${index}`} alt="" data-testId="list-item" onClick={() => handleListSelection(index)} />
         </div>
         })
       }
@@ -91,8 +91,8 @@ function Home() {
             </div>
             <div className="header">
               <div className='name'>
-                <div>{modalData[currentImgIndex]?.author}</div>
-                <div className='close-icon' onClick={() => {setModalVisible(false); setModalData([]); setCurrentImgIndex(0)}}>×</div>
+                <div data-testId="author">{modalData[currentImgIndex]?.author}</div>
+                <div className='close-icon' data-testId="close-icon" onClick={() => {setModalVisible(false); setModalData([]); setCurrentImgIndex(0)}}>×</div>
               </div>
               <div className="stepper-container">
                 {

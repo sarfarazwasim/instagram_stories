@@ -10,7 +10,7 @@ function Home() {
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const [currentProfileIndex, setCurrentProfileIndex] = useState(0);
   const [modalData, setModalData] = useState([{ download_url: '', author: ''}])
-  let timeoutId: ReturnType<typeof setTimeout> = setTimeout(() => '', 0);
+  const [timeoutId, setTimeoutId] = useState(setTimeout(() => '', 0));
   function updateImage (url: string, index: number) {
     setImageLoading(true)
     setCurrentImg(url)
@@ -79,9 +79,12 @@ function Home() {
               <img src={currentImg} alt=""
                 onClick={(e) => handleClick(e)}
                 onLoad={() => { 
-                  timeoutId = setTimeout(() => {
+                  clearTimeout(timeoutId)
+                  setTimeoutId(setTimeout(() => {
+                    clearTimeout(timeoutId)
                     handleClick({clientX: window.innerWidth})
-                  }, 5000);
+                  }, 5000));
+                  console.log('timeoutId', timeoutId)
                   setImageLoading(false)
                 }}
                 className={isImageLoading ? 'loading-image' : ''}
@@ -95,7 +98,10 @@ function Home() {
               <div className="stepper-container">
                 {
                   modalData.map(function (item, index) {
-                    return <div className={`stepper ${index <= currentImgIndex ? 'active' : ''}`}></div>
+                    return <div className={`stepper`}>
+                      { index < currentImgIndex && <div className='active' key={item.download_url}></div>}
+                      { index === currentImgIndex && !isImageLoading && <div className='animated-active' key={item.download_url}></div>}
+                    </div>
                   })
                 }
               </div>

@@ -73,9 +73,19 @@
             width: 100%;
             border-radius: 2px;
             height: 4px;
-            background-color: rgba(111, 111, 111, 0.147);
-            &.active {
+            background-color: rgba(153, 153, 153, 0.644);
+            .active {
+              height: 100%;
               background-color: white;
+            }
+            .animated-active {
+              height: 100%;
+              background-color: white;
+              animation: gradient 5s linear;
+            }
+            @keyframes gradient {
+                0% {width: 0%}
+                100% {width: 100%}
             }
           }
         }

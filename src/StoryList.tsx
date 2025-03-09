@@ -17,7 +17,6 @@ function Home() {
     setCurrentImgIndex(index)
   }
   function onSuccess (res: Array<{ download_url: '', author: ''}>) {
-    console.log('res', res)
     setModalData(res)
     updateImage(res[0].download_url, 0)
   }
@@ -83,7 +82,6 @@ function Home() {
                     clearTimeout(timeoutId)
                     handleClick({clientX: window.innerWidth})
                   }, 5000));
-                  console.log('timeoutId', timeoutId)
                   setImageLoading(false)
                 }}
                 className={isImageLoading ? 'loading-image' : ''}

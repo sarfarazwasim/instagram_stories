@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './StoryList.scss';
 
 function Home() {
-  const storyList = [1,2,3,4]
+  const storyList = [1,2,3,4,5,6,7]
   const [isModalVisible, setModalVisible] = useState(false);
   const [isImageLoading, setImageLoading] = useState(true);
   const [isFetchingData, setFetchingData] = useState(true);
@@ -22,7 +22,6 @@ function Home() {
     updateImage(res[0].download_url, 0)
   }
   function fetchStory (index: number) {
-    console.log('Index fetch', index)
     const url = `https://picsum.photos/v2/list?page=${index}&limit=${index}`
     fetch(url, {
       method: 'GET',
@@ -93,7 +92,7 @@ function Home() {
             <div className="header">
               <div className='name'>
                 <div>{modalData[currentImgIndex]?.author}</div>
-                <div className='close-icon' onClick={() => setModalVisible(false)}>×</div>
+                <div className='close-icon' onClick={() => {setModalVisible(false); setModalData([]); setCurrentImgIndex(0)}}>×</div>
               </div>
               <div className="stepper-container">
                 {

@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Instagram Stories - MWeb
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a project that imitates the popular social media platform, Instagram's story feature. You can see a preview or thumbnail of the stories in the home screen. On clicking on any of the thumbnail, a pop up opens which enables user to see the story. By default there is 5sec timer after which the next story loads automatically.
 
 ## Available Scripts
 
@@ -14,10 +14,13 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+### `npx playwright test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the standard E2E tests based on playwright runner.
+
+### `npx playwright test --ui`
+
+Launches the standard E2E tests with interactive UI popup in a browser, based on playwright runner.
 
 ### `npm run build`
 
